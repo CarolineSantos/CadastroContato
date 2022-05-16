@@ -6,17 +6,25 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using TestePratico.Models;
-using TestePratico.ViewModel;
+using TestePratico.Repository;
 
 namespace TestePratico.Controllers
 {
     public class HomeController : Controller
     {
-        AplicacaoRegras aplicacaoRegras = new AplicacaoRegras();
+        private readonly IContatoRepository _contato;
+
+        public HomeController(IContatoRepository contato)
+        {
+            _contato = contato;
+        }
 
         public IActionResult Index()
         {
-            return View();
+            List<ContatoModel> listaContatos = _contato.ListaContatos();
+            ContatoViewModel contatoViewModel = new ContatoViewModel();
+            contatoViewModel.Lista = listaContatos;
+            return View(contatoViewModel);
         }
 
         public IActionResult Privacy()
@@ -31,15 +39,24 @@ namespace TestePratico.Controllers
         }
 
         [HttpPost]
-        public IActionResult AdicionarContato(ContatoModel Contato)
+        public IActionResult AdicionarContato(ContatoViewModel Contato)
         {
-            aplicacaoRegras.AdicionarContato(Contato);
-            return View(Contato);
+            if (!String.IsNullOrEmpty(Contato.Registro.Nome) || !String.IsNullOrEmpty(Contato.Registro.Telefone))
+            {
+                _contato.AdicionarContato(Contato.Registro);
+                return RedirectToAction("Index");
+            }
+            else 
+            {
+                ModelState.AddModelError("Email", "O email é inválido.");
+                return RedirectToAction("Index");
+            }            
         }
 
-        public IActionResult ApagarContato(ContatoModel Contato)
+        public IActionResult ExcluirContato(int id)
         {
-            return View();
+            _contato.ExcluirContato(id);
+            return RedirectToAction("Index");
         }
     }
 }

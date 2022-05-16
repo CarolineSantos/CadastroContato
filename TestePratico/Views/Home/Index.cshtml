@@ -1,22 +1,22 @@
-﻿@model TestePratico.Models.ContatoModel
+﻿@model TestePratico.Models.ContatoViewModel
 
 @{
     ViewData["Title"] = "Principal";
 }
 
 <div class="text-center">
-    <form asp-controller="HomeController" asp-action="AdicionarContato" method="post">
+    <form asp-controller="Home" asp-action="AdicionarContato" method="post">
         <div class="form-group">
             <label for="nome">Nome</label>
-            <input type="text" class="form-control" placeholder="Digite o Nome" asp-for="Nome">
+            <input type="text" asp-for="Registro.Nome" class="form-control" placeholder="Digite o Nome">
         </div>
         <div class="form-group">
             <label for="telefone">Telefone</label>
-            <input type="text" class="form-control" placeholder="Digite o Telefone" asp-for="Telefone">
+            <input type="text" asp-for="Registro.Telefone" class="form-control" placeholder="Digite o Telefone">
         </div>
         <div class="form-group">
             <label for="celular">Celular</label>
-            <input type="text" class="form-control" placeholder="Digite o Celular" asp-for="Celular">
+            <input type="text" asp-for="Registro.Celular" class="form-control" placeholder="Digite o Celular">
         </div>
 
         <button type="submit" class="btn btn-primary">Adicionar</button>
@@ -32,29 +32,21 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>
-                    <button type="button" class="btn btn-primary">Excluir</button>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>
-                    <button type="button" class="btn btn-primary">Excluir</button>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>
-                    <button type="button" class="btn btn-primary">Excluir</button>
-                </td>
-            </tr>
+            @if (Model != null)
+            {
+                foreach (ContatoModel contato in Model.Lista)
+                {
+                    <tr>
+                        <th scope="row">@contato.Id</th>
+                        <th scope="row">@contato.Nome</th>
+                        <td>@contato.Telefone</td>
+                        <td>@contato.Celular</td>
+                        <td>
+                            <a role="button" class="btn btn-primary" asp-controller="Home" asp-action="ExcluirContato" asp-route-id="@contato.Id">Excluir</a>
+                        </td>
+                    </tr>
+                }
+            }
         </tbody>
     </table>
 </div>
