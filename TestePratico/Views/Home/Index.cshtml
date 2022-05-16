@@ -6,20 +6,21 @@
 
 <div class="text-center">
     <form asp-controller="Home" asp-action="AdicionarContato" method="post">
-        <div class="form-group">
-            <label for="nome">Nome</label>
-            <input type="text" asp-for="Registro.Nome" class="form-control" placeholder="Digite o Nome">
+        <div class="form-group form-inline">
+            <label for="nome">Nome &nbsp;&nbsp;&nbsp;</label>
+            <input type="text" asp-for="Registro.Nome" class="form-control " placeholder="Digite o Nome">
         </div>
-        <div class="form-group">
-            <label for="telefone">Telefone</label>
+        <div class="form-group form-inline">
+            <label for="telefone">Telefone &nbsp;&nbsp;&nbsp;</label>
             <input type="text" asp-for="Registro.Telefone" class="form-control" placeholder="Digite o Telefone">
         </div>
-        <div class="form-group">
-            <label for="celular">Celular</label>
+        <div class="form-group form-inline">
+            <label for="celular">Celular &nbsp;&nbsp;&nbsp;</label>
             <input type="text" asp-for="Registro.Celular" class="form-control" placeholder="Digite o Celular">
         </div>
 
         <button type="submit" class="btn btn-primary">Adicionar</button>
+        <p> </p>
     </form>
 
     <table class="table">
