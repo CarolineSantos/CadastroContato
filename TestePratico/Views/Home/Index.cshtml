@@ -1,0 +1,60 @@
+﻿@model TestePratico.Models.ContatoModel
+
+@{
+    ViewData["Title"] = "Principal";
+}
+
+<div class="text-center">
+    <form asp-controller="HomeController" asp-action="AdicionarContato" method="post">
+        <div class="form-group">
+            <label for="nome">Nome</label>
+            <input type="text" class="form-control" placeholder="Digite o Nome" asp-for="Nome">
+        </div>
+        <div class="form-group">
+            <label for="telefone">Telefone</label>
+            <input type="text" class="form-control" placeholder="Digite o Telefone" asp-for="Telefone">
+        </div>
+        <div class="form-group">
+            <label for="celular">Celular</label>
+            <input type="text" class="form-control" placeholder="Digite o Celular" asp-for="Celular">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Adicionar</button>
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Telefone</th>
+                <th scope="col">Celular</th>
+                <th scope="col"> </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>
+                    <button type="button" class="btn btn-primary">Excluir</button>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>
+                    <button type="button" class="btn btn-primary">Excluir</button>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td colspan="2">Larry the Bird</td>
+                <td>
+                    <button type="button" class="btn btn-primary">Excluir</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
